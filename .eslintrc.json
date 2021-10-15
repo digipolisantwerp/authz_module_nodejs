@@ -1,13 +1,17 @@
 {
-  "extends": "airbnb-base",
-  "env": {
-    "es6": true,
-    "node": true,
-    "mocha": true
-  },
-  "rules" : {
-    "import/prefer-default-export": "off",
-    "object-curly-newline": "off",
-    "no-unused-expressions": "off"
-  }
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "no-unused-expressions": 0
+    }
 }
