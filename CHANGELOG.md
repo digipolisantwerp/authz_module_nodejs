@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [Unreleased]: https://github.com/digipolisantwerp/authz_module_nodejs/compare/v1.0.0...HEAD
 ## [Unreleased] - yyyy-mm-dd
 
-- Update lockfile for vulnerabilities && update & apply eslint & airbnb
+[1.3.0]: https://github.com/digipolisantwerp/authz_module_nodejs/tree/v1.3.0
+## [1.3.0] - 2021-11-25
+
+- Add test for node 17
+- Removed official support for node 10
+- Update dependencies to latest version for vulnerabilities && update & apply eslint & airbnb
 
 [1.2.1]: https://github.com/digipolisantwerp/authz_module_nodejs/tree/v1.2.1
 ## [1.2.1] - 2020-12-15
