@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [Unreleased]: https://github.com/digipolisantwerp/authz_module_nodejs/compare/v1.0.0...HEAD
 ## [Unreleased] - yyyy-mm-dd
 
+[1.4.0]: https://github.com/digipolisantwerp/authz_module_nodejs/tree/v1.4.0
+## [1.4.0] - 2022-07-11
+
+- Add checkOneOfPermissions / hasOneOfPermissions
+
 [1.3.0]: https://github.com/digipolisantwerp/authz_module_nodejs/tree/v1.3.0
 ## [1.3.0] - 2021-11-25
 
