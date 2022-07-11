@@ -4,7 +4,7 @@ const axios = require('axios');
 const config = require('../lib/config');
 const { TOKEN_MISSING, PERMISSION_MISSING } = require('../lib/errors/error.messages');
 const umPermissions = require('./data/um.permissions.json');
-const { hasPermission } = require('../lib/middlewares/haspermission.middleware');
+const { hasOneOfPermissions } = require('../lib/middlewares/haspermission.middleware');
 const PermissionError = require('../lib/errors/permission.error');
 const logginghelper = require('../lib/helper/logging.helper');
 const authzv2 = require('../lib/services/datasources/authzv2.permissions');
@@ -51,7 +51,7 @@ describe('Haspermission middleware', () => {
   it('Permissions array', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission3', 'permission2', 'permission1']);
-    const middleware = hasPermission(['permission2', 'permission1']);
+    const middleware = hasOneOfPermissions(['permission2', 'permission1']);
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
     expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
@@ -59,15 +59,15 @@ describe('Haspermission middleware', () => {
   it('Permissions array has 1 of', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission2']);
-    const middleware = hasPermission(['permission2', 'permission1']);
+    const middleware = hasOneOfPermissions(['permission2', 'permission1']);
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg.message).to.equal('Missing permissions: permission1');
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
   });
   it('Permissions array (with datasource meauthzv2)', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(axios, 'get').returns(Promise.resolve({ data: umPermissions }));
-    const middleware = hasPermission(['login-app'], 'meauthzv2');
+    const middleware = hasOneOfPermissions(['login-app'], 'meauthzv2');
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
     expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
@@ -92,7 +92,7 @@ describe('Haspermission middleware', () => {
       },
     });
     sandbox.stub(axios, 'get').returns(Promise.resolve({ data: umPermissions }));
-    const middleware = hasPermission(['login-app'], 'meauthz');
+    const middleware = hasOneOfPermissions(['login-app'], 'meauthz');
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
     expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
@@ -100,7 +100,7 @@ describe('Haspermission middleware', () => {
   it('missing auth', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission3', 'permission2', 'permission1']);
-    const middleware = hasPermission(['permission2', 'permission1']);
+    const middleware = hasOneOfPermissions(['permission2', 'permission1']);
     const reqMissingAuth = { get: sandbox.stub().returns('') };
     await middleware(reqMissingAuth, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
@@ -111,7 +111,7 @@ describe('Haspermission middleware', () => {
   it('Permissions empty', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission3', 'permission2', 'permission1']);
-    const middleware = hasPermission();
+    const middleware = hasOneOfPermissions();
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
     expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
@@ -122,7 +122,7 @@ describe('Haspermission middleware', () => {
     };
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false, tokenLocation: 'session.authorization' });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission3', 'permission2', 'permission1']);
-    const middleware = hasPermission('permission1');
+    const middleware = hasOneOfPermissions('permission1');
     await middleware(fakeReq, {}, nextStub);
 
     sinon.assert.called(nextStub);
@@ -134,7 +134,7 @@ describe('Haspermission middleware', () => {
       authorization: false,
     };
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false, tokenLocation: 'session.authorization' });
-    const middleware = hasPermission(['permission2', 'permission1']);
+    const middleware = hasOneOfPermissions(['permission2', 'permission1']);
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
     expect(errArg).to.be.instanceof(Error);
@@ -144,7 +144,7 @@ describe('Haspermission middleware', () => {
   it('Permission string', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission3', 'permission2', 'permission1']);
-    const middleware = hasPermission('permission1');
+    const middleware = hasOneOfPermissions('permission1');
     await middleware(fakeReq, {}, nextStub);
 
     sinon.assert.called(nextStub);
@@ -155,7 +155,7 @@ describe('Haspermission middleware', () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission1']);
     const logging = sandbox.spy(logginghelper.logger, 'warn');
-    const middleware = hasPermission(['missing-permission']);
+    const middleware = hasOneOfPermissions(['missing-permission']);
     await middleware(fakeReq, {}, nextStub);
     sinon.assert.called(nextStub);
     const errArg = nextStub.firstCall.args[0];
@@ -167,7 +167,7 @@ describe('Haspermission middleware', () => {
   it('Hassn`t permission (debug)', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: true });
     const logging = sandbox.spy(logginghelper.logger, 'warn');
-    const middleware = hasPermission(['missing-permission']);
+    const middleware = hasOneOfPermissions(['missing-permission']);
     sandbox.stub(authzv2, 'getPermissions').resolves(['permission1']);
     await middleware(fakeReq, {}, nextStub);
 
