@@ -146,7 +146,6 @@ const { create } = require('./itemcreator.service');
 async function createSomething(params, usertoken) {
     await checkPermission(usertoken, 'login-app'); //throws error if invalid
     await checkPermission(usertoken, ['login-app', 'use-app']); //throws error if invalid
-    await checkPermission(usertoken, ['login-app', 'use-app']); //throws error if invalid
     await checkPermission(usertoken, 'login-app', 'meauthzv2'); //throws error if invalid
     await checkOneOfPermissions(usertoken, ['login-app', 'use-app'], 'meauthzv2'); //throws error if invalid
     return create(params);
