@@ -123,7 +123,7 @@ Configuration should be done before usage.
 
 ```javascript
 const { Router } = require('express');
-const { hasPermission } = require('@digipolis/authz');
+const { hasPermission, hasOneOfPermissions } = require('@digipolis/authz');
 
 const router = new Router();
 
@@ -131,21 +131,24 @@ const router = new Router();
 router.get('/', hasPermission('login-app'), controller);
 // Check multiple permissions in default source
 router.get('/', hasPermission(['login-app', 'admin-app']), controller);
-// Check permission in default meauthzv2 source
+// Check permission in meauthzv2 source
 router.get('/', hasPermission('login-app', 'meauthzv2'), controller);
-
+// Check for one of permissions in meauthzv2 source
+router.get('/', hasOneOfPermissions(['login-app', 'admin'], 'meauthzv2'), controller);
 ```
 #### Usage as function:
 Configuration should be done before usage.
 
 ```javascript
-const { checkPermission } = require('@digipolis/authz');
+const { checkPermission, hasOneOfPermissions } = require('@digipolis/authz');
 const { create } = require('./itemcreator.service');
 
 async function createSomething(params, usertoken) {
     await checkPermission(usertoken, 'login-app'); //throws error if invalid
     await checkPermission(usertoken, ['login-app', 'use-app']); //throws error if invalid
+    await checkPermission(usertoken, ['login-app', 'use-app']); //throws error if invalid
     await checkPermission(usertoken, 'login-app', 'meauthzv2'); //throws error if invalid
+    await checkOneOfPermissions(usertoken, ['login-app', 'use-app'], 'meauthzv2'); //throws error if invalid
     return create(params);
 }
 ```

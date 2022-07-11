@@ -6,7 +6,6 @@ const { helloWorld, helloWorldAuthz } = require('./demo.controller');
 
 const app = express();
 const port = 3000;
-
 // Setup configuration
 config({
   debug: true,
@@ -28,7 +27,7 @@ config({
 });
 
 app.get('/', hasPermission('login-app'), helloWorld);
-app.get('/meauthz', hasPermission('login-app', 'meauthzv2'), helloWorld);
+app.get('/meauthz', hasOneOfPermissions(['beheerder', 'lezer', 'superadmin'], 'meauthzv2'), helloWorld);
 app.get('/externalPermissionservice', hasPermission('login-app', 'myownpermissionservice'), helloWorld);
 app.get('/authzInController', helloWorldAuthz);
 app.get('/getPermissions', async (req, res, next) => {
