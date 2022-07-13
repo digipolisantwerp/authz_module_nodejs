@@ -6,8 +6,6 @@ const logginghelper = require('../lib/helper/logging.helper');
 const { checkPermission, checkOneOfPermissions } = require('../lib/services/permissionvalidation.service');
 const errorMessages = require('../lib/errors/error.messages');
 
-chai.use(require('sinon-chai'));
-
 const { expect } = chai;
 const umConfig = {
   debug: true,

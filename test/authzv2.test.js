@@ -8,8 +8,6 @@ const axios401error = require('./data/axios.error401.json');
 
 const { AUTHZV2_CONFIG_MISSING, APPLICATIONID_MISSING, PERMISSION_CALL_FAILED } = require('../lib/errors/error.messages');
 
-chai.use(require('sinon-chai'));
-
 const { expect } = chai;
 const config = require('../lib/config');
 const um = require('../lib/services/datasources/authzv2.permissions');

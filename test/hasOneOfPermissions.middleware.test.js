@@ -9,8 +9,6 @@ const PermissionError = require('../lib/errors/permission.error');
 const logginghelper = require('../lib/helper/logging.helper');
 const authzv2 = require('../lib/services/datasources/authzv2.permissions');
 
-chai.use(require('sinon-chai'));
-
 const { expect } = chai;
 const umConfig = {
   debug: true,

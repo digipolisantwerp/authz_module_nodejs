@@ -1,8 +1,6 @@
 const chai = require('chai');
 const sinon = require('sinon');
 
-chai.use(require('sinon-chai'));
-
 const { expect } = chai;
 const config = require('../lib/config');
 const logginghelper = require('../lib/helper/logging.helper');
