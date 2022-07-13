@@ -51,8 +51,10 @@ $ yarn add @digipolis/authz
 ### Available sources:
 #### authzv2:
 For applications which use the User Management Engine and have a JWT token of the authenticated user (mostly API's).
+Authzv2 works with jwt tokens. You can use the jwt-up policy to convert it
 #### meauthzv2:
 For applications which use the User Management Engine and have an OAuth2 access token of the authenticated user (mostly BFF's).
+This will not work for service accounts.
 
 ### Configuration for the use with the User Management Engine (UM):
 
