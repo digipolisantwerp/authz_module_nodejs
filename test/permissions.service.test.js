@@ -5,8 +5,6 @@ const permissionService = require('../lib/services/permissions.service');
 const um = require('../lib/services/datasources/authzv2.permissions');
 const meauthz = require('../lib/services/datasources/meauthz.permissions');
 
-chai.use(require('sinon-chai'));
-
 const { expect } = chai;
 const umConfig = {
   debug: true,
