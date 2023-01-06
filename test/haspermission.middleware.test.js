@@ -52,7 +52,7 @@ describe('Haspermission middleware', () => {
     const middleware = hasPermission(['permission2', 'permission1']);
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.an('undefined');
   });
   it('Permissions array has 1 of', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
@@ -68,7 +68,7 @@ describe('Haspermission middleware', () => {
     const middleware = hasPermission(['login-app'], 'meauthzv2');
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.an('undefined');
   });
   it('Permissions array (with datasource meauthz)', async () => {
     sandbox.stub(config, 'getConfig').returns({
@@ -93,7 +93,7 @@ describe('Haspermission middleware', () => {
     const middleware = hasPermission(['login-app'], 'meauthz');
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.an('undefined');
   });
   it('missing auth', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });
@@ -112,7 +112,7 @@ describe('Haspermission middleware', () => {
     const middleware = hasPermission();
     await middleware(fakeReq, {}, nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.an('undefined');
   });
   it('Auth different location', async () => {
     fakeReq.session = {
@@ -125,7 +125,7 @@ describe('Haspermission middleware', () => {
 
     sinon.assert.called(nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.an('undefined');
   });
   it('Auth different location missing', async () => {
     fakeReq.session = {
@@ -147,7 +147,7 @@ describe('Haspermission middleware', () => {
 
     sinon.assert.called(nextStub);
     const errArg = nextStub.firstCall.args[0];
-    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.undefined;
+    expect(errArg, 'Next shoudn`t be called with argument if successful`').to.be.an('undefined');
   });
   it('Hassn`t permission', async () => {
     sandbox.stub(config, 'getConfig').returns({ ...umConfig, debug: false });

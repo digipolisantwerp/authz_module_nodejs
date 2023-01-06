@@ -5,13 +5,12 @@
         "node": true,
         "mocha": true
     },
-    "extends": [
-        "airbnb-base"
+    "extends": "airbnb-base",
+    "overrides": [
     ],
     "parserOptions": {
-        "ecmaVersion": 12
+        "ecmaVersion": "latest"
     },
     "rules": {
-        "no-unused-expressions": 0
     }
 }
