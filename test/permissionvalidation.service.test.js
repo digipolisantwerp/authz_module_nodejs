@@ -9,12 +9,12 @@ const errorMessages = require('../lib/errors/error.messages');
 const { expect } = chai;
 const umConfig = {
   debug: true,
-  applicationId: 'FAKEAPP',
   source: 'authzv2',
   sources: {
     authzv2: {
       url: 'fakeurl',
       apiKey: 'fakekey',
+      applicationId: 'FAKEAPP',
     },
   },
 };

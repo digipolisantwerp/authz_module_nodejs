@@ -13,7 +13,7 @@ const um = require('../lib/services/datasources/meauthz.permissions');
 
 const umConfig = {
   debug: true,
-  source: 'meauthz',
+  source: 'meauthzv2',
   sources: {
     meauthzv2: {
       url: 'fakeurl',
