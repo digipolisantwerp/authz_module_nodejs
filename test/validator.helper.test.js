@@ -41,7 +41,7 @@ describe('validator.helper', () => {
     try {
       validateConfig(config);
     } catch (e) {
-      expect(e.message).to.eql('"source" must be one of [authzv2, meauthzv2, externalAuthz]');
+      expect(e.message).to.eql('"source" must be one of [authzv2, meauthzv2, meauthz, externalAuthz]');
     }
   });
 
