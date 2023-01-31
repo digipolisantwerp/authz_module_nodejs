@@ -12,7 +12,6 @@ const authzv2 = require('../lib/services/datasources/authzv2.permissions');
 const { expect } = chai;
 const umConfig = {
   debug: true,
-  applicationId: 'FAKEAPP',
   source: 'authzv2',
   tokenLocation: 'headers.authorization',
   sources: {
