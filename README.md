@@ -98,7 +98,7 @@ config({
 ```
 
 ##### Example with session or auth package:
-This is a typical setup for bffs that need permission checks and are already using the [Digipolis auth pacakge](https://github.com/digipolisantwerp/auth_module_nodejs) or keeping accesstokens in express-session
+This is a typical setup for bffs that need permission checks and are already using the [Digipolis auth package](https://github.com/digipolisantwerp/auth_module_nodejs) or keeping accesstokens in express-session
 
 ```javascript
 const { config } = require('@digipolis/authz');
@@ -106,7 +106,7 @@ const { config } = require('@digipolis/authz');
 config({
   debug: true,
   source: 'meauthzv2',
-  tokenLocation: 'session.userToken.accessToken', // The auth pacakge saves the token at this location
+  tokenLocation: 'session.userToken.accessToken', // The auth package saves the token at this location
   sources: {
     meauthzv2: {
       url:  '_URL_AUTHZ_',
@@ -201,7 +201,7 @@ Retrieve permissions as a list
   // Default source (set in config)
   const permissions = await getPermissions(req.headers.authorization);
 
-  // specific  source
+  // specific source
   const permissionsMeauthz = await getPermissions(req.headers.authorization, 'meauthz');
 ```
 **Returns:** *Array['string']*:
