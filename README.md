@@ -4,6 +4,7 @@
 
 **npm:** [npmjs.com/package/@digipolis/authz](https://www.npmjs.com/package/@digipolis/authz)
 # @digipolis/Authz
+<img src="assets/authz.svg" alt="log" width="100"/>
 
 Authorization module which can be used to check the permissions of an authenticated user.
 
