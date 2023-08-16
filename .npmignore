@@ -10,6 +10,7 @@ CHANGELOG.md
 LICENSE
 README.md
 coverage
+assets
 example
 nodemon.json
 swagger.yml
