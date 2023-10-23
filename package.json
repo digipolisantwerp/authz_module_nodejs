@@ -17,15 +17,15 @@
   "main": "lib/index.js",
   "devDependencies": {
     "c8": "^8.0.1",
-    "chai": "^4.3.7",
-    "eslint": "^8.47.0",
+    "chai": "^4.3.10",
+    "eslint": "^8.52.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-import": "^2.29.0",
     "mocha": "^10.2.0",
-    "sinon": "^15.2.0"
+    "sinon": "^17.0.0"
   },
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.5.1",
     "node-cache": "^5.1.2"
   }
 }
