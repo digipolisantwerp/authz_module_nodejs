@@ -2,6 +2,7 @@
   "name": "@digipolis/authz",
   "version": "1.4.4",
   "description": "Authorization module which can be used to check the permissions of an authenticated user.",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha ./test && npm run lint",
     "lint": "eslint \"**/*.js\"",
