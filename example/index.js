@@ -1,5 +1,5 @@
 const express = require('express');
-const { config, hasPermission, getPermissions } = require('./../lib');
+const { config, hasPermission, getPermissions, hasOneOfPermissions } = require('./../lib');
 const errorhandler = require('./error.middleware');
 const permissionService = require('./permission.service');
 const { helloWorld, helloWorldAuthz } = require('./demo.controller');
