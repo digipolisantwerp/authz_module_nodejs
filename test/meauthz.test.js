@@ -59,7 +59,7 @@ describe('Get Permissions from meAuthzv2:', () => {
       sinon.assert.called(logging);
     });
   });
-  it('Error not configured (debug)', async () => {
+  it('Error not configured (debug) with sources', async () => {
     sandbox.stub(config, 'getConfig').returns({ debug: true, sources: {} });
     const logging = sandbox.spy(logginghelper.logger, 'warn');
     await um.getPermissions('FAKEAPP', 'FakeJWT').then((result) => {
